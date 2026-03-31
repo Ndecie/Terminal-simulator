@@ -1,2 +1,2 @@
 # Terminal-simulator
-Free online terminal simulator - Practice Windows, Mac &amp; Linux commands
+Free online terminal simulator — Practice Windows PowerShell, Mac & Linux Bash commands directly in your browser. All-in-one single page: choose your OS, type real commands, get realistic responses, and learn with a built-in command reference. No installation, no sign-up, no confusing navigation. Just open and start practicing. Perfect for beginners, students, and anyone learning the command line.
