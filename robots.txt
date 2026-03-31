@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ndecie.github.io/Terminal-simulator/sitemap.xml
