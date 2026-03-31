@@ -579,53 +579,54 @@ function buildModal() {
   const ov = document.createElement('div');
   ov.className = 'a11y-overlay';
   ov.id = 'a11y-modal-overlay';
+  var fr = currentLang === 'fr';
   ov.innerHTML = `
   <div class="a11y-modal">
     <div style="text-align:center;margin-bottom:8px;font-size:32px;">🔧</div>
-    <h2 style="text-align:center;">Personnalisation</h2>
-    <p class="sub" style="text-align:center;">Avez-vous des besoins visuels particuliers ? Cochez ce qui vous concerne pour adapter l'interface. Modifiable à tout moment.</p>
+    <h2 style="text-align:center;">${fr ? 'Personnalisation' : 'Personalization'}</h2>
+    <p class="sub" style="text-align:center;">${fr ? "Avez-vous des besoins visuels particuliers ? Cochez ce qui vous concerne pour adapter l'interface. Modifiable à tout moment." : 'Do you have any visual needs? Check what applies to customize the interface. You can change this anytime.'}</p>
     
     <div class="a11y-check" data-val="daltonisme" onclick="toggleCheck(this)">
       <div class="a11y-box"></div>
       <div class="a11y-check-info">
-        <h4>👁️ Daltonisme</h4>
-        <p>Difficulté à distinguer certaines couleurs. Active la correction colorimétrique avec réglage d'intensité (léger à sévère).</p>
+        <h4>${fr ? '👁️ Daltonisme' : '👁️ Color Blindness'}</h4>
+        <p>${fr ? "Difficulté à distinguer certaines couleurs. Active la correction colorimétrique avec réglage d'intensité." : 'Difficulty distinguishing colors. Activates color correction with adjustable intensity (light to severe).'}</p>
       </div>
     </div>
     
     <div class="a11y-check" data-val="dyslexie" onclick="toggleCheck(this)">
       <div class="a11y-box"></div>
       <div class="a11y-check-info">
-        <h4>🧠 Dyslexie</h4>
-        <p>Difficulté à lire. Active une police optimisée (Lexend), un interligne élargi et un espacement des lettres augmenté.</p>
+        <h4>${fr ? '🧠 Dyslexie' : '🧠 Dyslexia'}</h4>
+        <p>${fr ? "Difficulté à lire. Active une police optimisée (Lexend), un interligne élargi et un espacement des lettres augmenté." : 'Reading difficulty. Activates an optimized font (Lexend), wider line spacing and increased letter spacing.'}</p>
       </div>
     </div>
     
     <div class="a11y-check" data-val="basseVision" onclick="toggleCheck(this)">
       <div class="a11y-box"></div>
       <div class="a11y-check-info">
-        <h4>👓 Basse vision</h4>
-        <p>Vision floue, besoin de gros texte. Augmente la taille et active le contraste élevé.</p>
+        <h4>${fr ? '👓 Basse vision' : '👓 Low Vision'}</h4>
+        <p>${fr ? 'Vision floue, besoin de gros texte. Augmente la taille et active le contraste élevé.' : 'Blurry vision, need for large text. Increases font size and activates high contrast.'}</p>
       </div>
     </div>
     
     <div class="a11y-check" data-val="photosensibilite" onclick="toggleCheck(this)">
       <div class="a11y-box"></div>
       <div class="a11y-check-info">
-        <h4>💫 Photosensibilité</h4>
-        <p>Sensibilité à la lumière et aux animations. Désactive les animations et effets clignotants.</p>
+        <h4>${fr ? '💫 Photosensibilité' : '💫 Photosensitivity'}</h4>
+        <p>${fr ? 'Sensibilité à la lumière et aux animations. Désactive les animations et effets clignotants.' : 'Sensitivity to light and animations. Disables all animations and flashing effects.'}</p>
       </div>
     </div>
     
     <div class="a11y-check" data-val="aucun" onclick="toggleCheck(this)">
       <div class="a11y-box"></div>
       <div class="a11y-check-info">
-        <h4>👤 Aucun besoin particulier</h4>
-        <p>Accès au thème sombre/clair, couleurs d'accent et personnalisation de police.</p>
+        <h4>${fr ? '👤 Aucun besoin particulier' : '👤 No particular need'}</h4>
+        <p>${fr ? "Accès au thème sombre/clair et personnalisation de police." : 'Access to dark/light theme and font customization options.'}</p>
       </div>
     </div>
     
-    <button class="a11y-confirm" onclick="confirmA11y()">Continuer →</button>
+    <button class="a11y-confirm" onclick="confirmA11y()">${fr ? 'Continuer →' : 'Continue →'}</button>
   </div>`;
   document.body.appendChild(ov);
 }
@@ -674,7 +675,7 @@ function showTuto() {
   const t = document.createElement('div');
   t.className = 'a11y-tuto';
   t.id = 'a11y-tuto';
-  t.innerHTML = '<div class="a11y-tuto-arrow"></div><p>👉 Cliquez sur le bouton <strong>🔧</strong> en haut à droite pour ouvrir vos <strong>réglages visuels</strong>. Police, taille, contraste, couleurs de fond — tout est modifiable.</p><button class="a11y-tuto-close" onclick="hideTuto()">Compris !</button>';
+  t.innerHTML = '<div class="a11y-tuto-arrow"></div><p>' + (currentLang==='fr' ? '👉 Cliquez sur le bouton <strong>🔧</strong> en haut à droite pour ouvrir vos <strong>réglages visuels</strong>. Police, taille, contraste — tout est modifiable.' : '👉 Click the <strong>🔧</strong> button at the top right to open your <strong>visual settings</strong>. Font, size, contrast — everything is customizable.') + '</p><button class="a11y-tuto-close" onclick="hideTuto()">' + (currentLang==='fr' ? 'Compris !' : 'Got it!') + '</button>';
   document.body.appendChild(t);
   setTimeout(() => hideTuto(), 8000);
 }
@@ -819,7 +820,7 @@ function setTheme(mode) {
 }
 
 // === LANGUAGE TOGGLE ===
-let currentLang = 'en';
+let currentLang = (navigator.language || navigator.userLanguage || 'en').startsWith('fr') ? 'fr' : 'en';
 
 function toggleLang() {
   const newLang = currentLang === 'en' ? 'fr' : 'en';
@@ -896,8 +897,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const savedTheme = localStorage.getItem('terminal_theme') || (a11yState?.settings?.theme) || 'dark';
   setTheme(savedTheme);
   
-  // Restore language
-  const savedLang = localStorage.getItem('terminal_lang') || 'en';
+  // Restore language (priority: saved > browser detection > english)
+  const browserLang = (navigator.language || navigator.userLanguage || 'en').startsWith('fr') ? 'fr' : 'en';
+  const savedLang = localStorage.getItem('terminal_lang') || browserLang;
   setLang(savedLang);
   
   // Run intro animation
